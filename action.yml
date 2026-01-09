@@ -48,7 +48,7 @@ runs:
       shell: bash
     - name: Log in to spacedock
       run: |
-        encoded_password=$(printf '%s' "${{ inputs.password }}" | jq -sRr @uri)
+        encoded_password=$(printf '%s' '${{ inputs.password }}' | jq -sRr @uri)
         echo "::add-mask::$encoded_password"
         login_response=$(curl -F "username=${{ inputs.username }}" -F "password=$encoded_password" -c ./cookies "https://${{ inputs.spacedock_website }}/api/login")
         login_errored=$(echo $login_response | jq .error)
